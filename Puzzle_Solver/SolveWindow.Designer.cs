@@ -35,6 +35,7 @@
             this.simulateSolve_btn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.solveState_lbl = new System.Windows.Forms.Label();
+            this.status_lbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -109,6 +110,19 @@
             this.solveState_lbl.Size = new System.Drawing.Size(0, 31);
             this.solveState_lbl.TabIndex = 14;
             // 
+            // status_lbl
+            // 
+            this.status_lbl.AutoSize = true;
+            this.status_lbl.BackColor = System.Drawing.Color.Transparent;
+            this.status_lbl.Font = new System.Drawing.Font("Mongolian Baiti", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.status_lbl.ForeColor = System.Drawing.Color.LightGray;
+            this.status_lbl.Location = new System.Drawing.Point(724, 446);
+            this.status_lbl.Name = "status_lbl";
+            this.status_lbl.Size = new System.Drawing.Size(132, 31);
+            this.status_lbl.TabIndex = 15;
+            this.status_lbl.Text = "Solving..";
+            this.status_lbl.Visible = false;
+            // 
             // SolveWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -116,6 +130,7 @@
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1006, 529);
+            this.Controls.Add(this.status_lbl);
             this.Controls.Add(this.solveState_lbl);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.simulateSolve_btn);
@@ -139,5 +154,6 @@
         private Button simulateSolve_btn;
         private Button button1;
         private Label solveState_lbl;
+        private Label status_lbl;
     }
 }

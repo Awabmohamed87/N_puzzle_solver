@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Awab\\Desktop\\Puzzle_Solver\\Puzzle_Solver\\Puzzle_Solver.csproj",
+      "projectUniqueName": "C:\\Users\\Awab\\Downloads\\Puzzle_Solver\\Puzzle_Solver\\Puzzle_Solver.csproj",
       "projectName": "Puzzle_Solver",
-      "projectPath": "C:\\Users\\Awab\\Desktop\\Puzzle_Solver\\Puzzle_Solver\\Puzzle_Solver.csproj",
+      "projectPath": "C:\\Users\\Awab\\Downloads\\Puzzle_Solver\\Puzzle_Solver\\Puzzle_Solver.csproj",
       "packagesPath": "C:\\Users\\Awab\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Awab\\Desktop\\Puzzle_Solver\\Puzzle_Solver\\obj\\",
+      "outputPath": "C:\\Users\\Awab\\Downloads\\Puzzle_Solver\\Puzzle_Solver\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Awab\\AppData\\Roaming\\NuGet\\NuGet.Config",

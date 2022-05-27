@@ -37,14 +37,113 @@ namespace Puzzle_Solver
             if (isSolvable())
             {
                 if (solveSelection == 0) solveByManhattan();
+                else if (solveSelection == 1)
+                    solveByHamming();
                 else
-                solveByHamming();
+                    BFS();
 
                 isSolve = true;
             }
             
         }
+        class DFSNode
+        {
+            public PriorityQueue<Node, int> children = new PriorityQueue<Node, int>();
+            public PriorityQueue<Node, int> parentQueue = new PriorityQueue<Node, int>();
+        }
+        void BFS()
+        {
+            manhattanValue = calcManhattanWeight();
+            bool isSolved = false;
+            PriorityQueue<DFSNode, int> pa = new PriorityQueue<DFSNode, int>();
 
+            Node Root = new(null, gameMatrix, manhattanValue, -1, zeroIndexX, zeroIndexY, "N", -1);
+            Node parent = Root;
+            DFSNode dfsNode = new DFSNode();
+
+            Node node;
+            int[] dir = new int[4] { 3, 0, 2, 1 };
+            List<Node> closedList = new List<Node>();
+            bool inList = false;
+            while (!isSolved)
+            {
+                dfsNode.parentQueue = dfsNode.children;
+                dfsNode.children.Clear();
+                foreach (int i in dir)
+                {
+                    inList = false;
+                    if (i < adjacents[zeroIndexX * puzzleSize + zeroIndexY + 1].Count)
+                    {
+
+
+                        if (adjacents[zeroIndexX * puzzleSize + zeroIndexY + 1][i] == parent.oppositedirection)
+                            continue;
+                        ushort[] matrix = new ushort[puzzleSize * puzzleSize];
+                        parent.gameM.CopyTo(matrix, 0);
+
+                        int m = parent.heuristicValue - cost(matrix, arrayIndex[adjacents[zeroIndexX * puzzleSize + zeroIndexY + 1][i]].Key, arrayIndex[adjacents[zeroIndexX * puzzleSize + zeroIndexY + 1][i]].Value);
+
+                        matrix[zeroIndexX * puzzleSize + zeroIndexY] = matrix[adjacents[zeroIndexX * puzzleSize + zeroIndexY + 1][i] - 1];
+                        matrix[adjacents[zeroIndexX * puzzleSize + zeroIndexY + 1][i] - 1] = 0;
+
+                        m += cost(matrix, zeroIndexX, zeroIndexY);
+
+                        node = new Node(parent.getMoveDirection(), matrix, m, parent.levelNumber, arrayIndex[adjacents[zeroIndexX * puzzleSize + zeroIndexY + 1][i]].Key,
+                            arrayIndex[adjacents[zeroIndexX * puzzleSize + zeroIndexY + 1][i]].Value,
+                                                mapMove(zeroIndexX, zeroIndexY, arrayIndex[adjacents[zeroIndexX * puzzleSize + zeroIndexY + 1][i]].Key,
+                                                arrayIndex[adjacents[zeroIndexX * puzzleSize + zeroIndexY + 1][i]].Value), zeroIndexX * puzzleSize + zeroIndexY + 1);
+                        node.parentPath = parent.path;
+                        for (int a = 0; a < closedList.Count; a++)
+                        {
+                            if (compare2Darray(closedList[a].gameM, node.gameM))
+                            {
+                                inList = true;
+                                break;
+                            }
+                        }
+                        if (inList)
+                            continue;
+                        dfsNode.children.Enqueue(node, node.heuristicValue + node.levelNumber);
+
+                    }
+                }
+                while (true)
+                {
+                    if (dfsNode.children.Count > 0)
+                    {
+                        parent = dfsNode.children.Dequeue();
+                        break;
+                    }
+                    else
+                        dfsNode.children = dfsNode.parentQueue;
+                }
+                closedList.Add(parent);
+                parent.path += parent.getMoveDirection() + parent.parentPath;
+
+                zeroIndexX = parent.getZeroIndexX();
+                zeroIndexY = parent.getZeroIndexY();
+
+                if (parent.heuristicValue == 0)
+                {
+                    isSolved = true;
+
+                }
+
+            }
+
+            levelNumber = parent.levelNumber;
+            theWay = parent.path;
+        }
+
+        public bool compare2Darray(ushort[] arr1, ushort[] arr2)
+        {
+            for (int i = 0; i < puzzleSize * puzzleSize; i++)
+            {
+                if (arr2[i] != arr1[i])
+                    return false;
+            }
+            return true;
+        }
         public int getMovesNumber() => levelNumber;
         public string getElapsedTime() => Convert.ToString( stopwatch.Elapsed.TotalSeconds);
 

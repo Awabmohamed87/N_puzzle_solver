@@ -20,9 +20,14 @@ namespace Puzzle_Solver
         DataReader dr = new DataReader();
         private void insertPuzzle_btn_Click(object sender, EventArgs e)
         {
-            NewPuzzleForm newPuzzleForm = new NewPuzzleForm(Convert.ToInt32(puzzleSize_tb.Text));
-            newPuzzleForm.Show();
-            //this.Close();
+            if(Convert.ToInt32(puzzleSize_tb.Text)<=10)
+            {
+                NewPuzzleForm newPuzzleForm = new NewPuzzleForm(Convert.ToInt32(puzzleSize_tb.Text));
+                newPuzzleForm.Show();
+            }
+            else {
+                MessageBox.Show("maximum N value is 10");
+            }
         }
 
         
@@ -43,10 +48,12 @@ namespace Puzzle_Solver
             if (!dr.isSolvableByHamming(selectTest_cb.SelectedItem.ToString()))
             {
                 hamming_rb.Enabled = false;
+                BFS_rb.Enabled = false;
                 manhattan_rb.Checked = true;
             }
             else {
                 hamming_rb.Enabled = true;
+                BFS_rb.Enabled = true;
             }
         }
 
@@ -58,9 +65,44 @@ namespace Puzzle_Solver
 
         private void simulateSolve_btn_Click(object sender, EventArgs e)
         {
-            
+            ushort solveSelection;
+            if (BFS_rb.Checked)
+                solveSelection = 2;
+            else if (manhattan_rb.Checked)
+                solveSelection = 0;
+            else
+                solveSelection = 1;
+
+            //SolveWindow solveWindow = new SolveWindow(dr.getPuzzleMatrix(), dr.getPuzzleList(), (ushort)dr.getSize(), solveSelection);
+
             dr.Read(dr.getPath(selectTest_cb.SelectedItem.ToString()));
-            SolveWindow solveWindow = new SolveWindow(dr.getPuzzleMatrix(),dr.getPuzzleList(),(ushort)dr.getSize(),manhattan_rb.Checked?(ushort)0: (ushort)1);
+            if (dr.getSize() < 50)
+            {
+                SolveWindow solveWindow = new SolveWindow(dr.getPuzzleMatrix(), dr.getPuzzleList(), (ushort)dr.getSize(), solveSelection);
+
+                solveWindow.Show();
+            }
+            else
+            {
+                Graph graph = new Graph(dr.getPuzzleMatrix(), dr.getPuzzleList(), (ushort)dr.getSize(), solveSelection);
+                MessageBox.Show("Very large puzzle size\nNumber of moves : " + graph.getMovesNumber()
+                + " Elapsed time : " + graph.getElapsedTime());
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog(this);
+            dr.Read(openFileDialog1.FileName);
+            ushort solveSelection;
+            if (BFS_rb.Checked)
+                solveSelection = 2;
+            else if (manhattan_rb.Checked)
+                solveSelection = 0;
+            else
+                solveSelection = 1;
+                  
+            SolveWindow solveWindow = new SolveWindow(dr.getPuzzleMatrix(), dr.getPuzzleList(), (ushort)dr.getSize(),solveSelection);
             solveWindow.Show();
         }
     }

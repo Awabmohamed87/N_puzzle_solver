@@ -66,9 +66,9 @@ namespace Puzzle_Solver
         Graph graph;    
         private void simulateSolve_btn_Click(object sender, EventArgs e)
         {
-           
+            status_lbl.Visible = true;
             graph = new Graph(gameMatrix, gameList, puzzleSize,solveSelection);
-
+            status_lbl.Text = "Solved.";
             if (graph.getPath().Length == 0) {
                 MessageBox.Show("UnSolvable puzzle");
             }

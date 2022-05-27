@@ -43,6 +43,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.simulateSolve_btn = new System.Windows.Forms.Button();
             this.insertPuzzle_btn = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.BFS_rb = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -127,12 +131,13 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.groupBox1.Controls.Add(this.BFS_rb);
             this.groupBox1.Controls.Add(this.manhattan_rb);
             this.groupBox1.Controls.Add(this.hamming_rb);
             this.groupBox1.Font = new System.Drawing.Font("Mongolian Baiti", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(132, 313);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(257, 129);
+            this.groupBox1.Size = new System.Drawing.Size(257, 149);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Solve by";
@@ -140,7 +145,7 @@
             // manhattan_rb
             // 
             this.manhattan_rb.AutoSize = true;
-            this.manhattan_rb.Location = new System.Drawing.Point(59, 43);
+            this.manhattan_rb.Location = new System.Drawing.Point(59, 27);
             this.manhattan_rb.Name = "manhattan_rb";
             this.manhattan_rb.Size = new System.Drawing.Size(114, 22);
             this.manhattan_rb.TabIndex = 1;
@@ -151,7 +156,7 @@
             // hamming_rb
             // 
             this.hamming_rb.AutoSize = true;
-            this.hamming_rb.Location = new System.Drawing.Point(59, 84);
+            this.hamming_rb.Location = new System.Drawing.Point(59, 73);
             this.hamming_rb.Name = "hamming_rb";
             this.hamming_rb.Size = new System.Drawing.Size(105, 22);
             this.hamming_rb.TabIndex = 0;
@@ -199,13 +204,52 @@
             // 
             this.insertPuzzle_btn.BackColor = System.Drawing.Color.LightGray;
             this.insertPuzzle_btn.Font = new System.Drawing.Font("Mongolian Baiti", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.insertPuzzle_btn.Location = new System.Drawing.Point(653, 339);
+            this.insertPuzzle_btn.Location = new System.Drawing.Point(678, 313);
             this.insertPuzzle_btn.Name = "insertPuzzle_btn";
             this.insertPuzzle_btn.Size = new System.Drawing.Size(225, 49);
             this.insertPuzzle_btn.TabIndex = 11;
             this.insertPuzzle_btn.Text = "Insert puzzle";
             this.insertPuzzle_btn.UseVisualStyleBackColor = false;
             this.insertPuzzle_btn.Click += new System.EventHandler(this.insertPuzzle_btn_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Mongolian Baiti", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label7.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label7.Location = new System.Drawing.Point(539, 436);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(180, 31);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Load puzzle:";
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.LightGray;
+            this.button1.Font = new System.Drawing.Font("Mongolian Baiti", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.Location = new System.Drawing.Point(736, 433);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(178, 39);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Explore";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // BFS_rb
+            // 
+            this.BFS_rb.AutoSize = true;
+            this.BFS_rb.Location = new System.Drawing.Point(59, 110);
+            this.BFS_rb.Name = "BFS_rb";
+            this.BFS_rb.Size = new System.Drawing.Size(61, 22);
+            this.BFS_rb.TabIndex = 2;
+            this.BFS_rb.TabStop = true;
+            this.BFS_rb.Text = "BFS";
+            this.BFS_rb.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -214,6 +258,8 @@
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1006, 529);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.insertPuzzle_btn);
             this.Controls.Add(this.simulateSolve_btn);
             this.Controls.Add(this.label6);
@@ -253,5 +299,9 @@
         private Label label6;
         private Button simulateSolve_btn;
         private Button insertPuzzle_btn;
+        private Label label7;
+        private Button button1;
+        private OpenFileDialog openFileDialog1;
+        private RadioButton BFS_rb;
     }
 }
